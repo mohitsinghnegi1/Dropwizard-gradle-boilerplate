@@ -1,5 +1,6 @@
 package com.example.helloworld;
 
+import com.example.helloworld.resources.BookResource;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
@@ -32,6 +33,7 @@ public class HelloWorldApplication extends Application<HelloWorldConfiguration> 
             new TemplateHealthCheck(configuration.getTemplate());
         environment.healthChecks().register("template", healthCheck);
         environment.jersey().register(resource);
+        environment.jersey().register(new BookResource());
     }
 
 }
