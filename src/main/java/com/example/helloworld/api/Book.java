@@ -1,14 +1,15 @@
 package com.example.helloworld.api;
 
+import com.example.helloworld.interfaces.IBookInfo;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.validator.constraints.Length;
 
-public class Book {
+public class Book implements IBookInfo {
 
     @Length(max = 4)
-    private String id;
+    public String id;
     @Length(max = 4)
-    private String authorId;
+    public String authorId;
 
     public Book() {
        // Needed by Jackson deserialization
