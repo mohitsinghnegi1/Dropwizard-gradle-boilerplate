@@ -9,7 +9,6 @@ import java.util.*;
 
 public class InMemoryDb implements IDbService {
 
-    private static InMemoryDb instance = null;
     private static Hashtable<String,IAuthorInfo> authorsInfo = null;
     private static Hashtable<String,IBookInfo> booksInfo = null;
     private static Hashtable<String,ArrayList<IBookInfo>> authorToBooksMap = null;
@@ -18,13 +17,6 @@ public class InMemoryDb implements IDbService {
         authorsInfo = new Hashtable<String,IAuthorInfo>();
         booksInfo = new Hashtable<String,IBookInfo>();
         authorToBooksMap = new Hashtable<String,ArrayList<IBookInfo>>();
-    }
-
-    public static InMemoryDb getInstance(){
-        if(instance==null){
-            instance = new InMemoryDb();
-        }
-        return instance;
     }
 
     @Override

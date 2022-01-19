@@ -6,6 +6,7 @@ import com.example.helloworld.interfaces.IAuthorInfo;
 import com.example.helloworld.interfaces.IBookInfo;
 import com.example.helloworld.services.AuthorManagementService;
 import com.example.helloworld.services.BookManagementService;
+import com.google.inject.Inject;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -21,6 +22,7 @@ public class AuthorResource {
     private final AuthorManagementService ams;
     private final BookManagementService bms;
 
+    @Inject
     public AuthorResource(AuthorManagementService ams, BookManagementService bms){
         this.ams = ams;
         this.bms = bms;

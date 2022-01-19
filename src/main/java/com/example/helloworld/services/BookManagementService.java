@@ -2,6 +2,7 @@ package com.example.helloworld.services;
 
 import com.example.helloworld.interfaces.IBookInfo;
 import com.example.helloworld.interfaces.IDbService;
+import com.google.inject.Inject;
 
 import java.util.List;
 
@@ -9,6 +10,7 @@ public class BookManagementService {
 
     private final IDbService dbService;
 
+    @Inject
     public BookManagementService(IDbService dbService){
         this.dbService = dbService;
     }
