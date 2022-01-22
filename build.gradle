@@ -8,7 +8,7 @@ version = "1.0.0"
 jar {
   manifest {
     attributes(
-      'Main-Class': 'com.example.helloworld.HelloWorldApplication'
+      'Main-Class': 'com.example.helloworld.BookStoreApplication'
     )
   }
 }
@@ -26,7 +26,12 @@ repositories {
 dependencies {
     compile 'io.dropwizard:dropwizard-core:1.0.2'
     compile group: 'com.google.inject', name: 'guice', version: '4.1.0'
-    
+
+    compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.13'
+    compile group: 'org.hibernate', name: 'hibernate-core', version: '5.2.8.Final'
+
+
+
     testCompile 'junit:junit:4.11'
 }
 

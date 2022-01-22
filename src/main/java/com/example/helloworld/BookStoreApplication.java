@@ -1,25 +1,41 @@
 package com.example.helloworld;
 
-import com.example.helloworld.api.Book;
-import com.example.helloworld.interfaces.IDbService;
+import com.example.helloworld.entity.Books;
+import com.example.helloworld.healthchecks.TemplateHealthCheck;
 import com.example.helloworld.models.Bindings;
-import com.example.helloworld.models.Square;
-import com.example.helloworld.repository.InMemoryDb;
 import com.example.helloworld.resources.AuthorResource;
 import com.example.helloworld.resources.BookResource;
-import com.example.helloworld.services.AuthorManagementService;
-import com.example.helloworld.services.BookManagementService;
+import com.example.helloworld.resources.HelloWorldResource;
 import com.example.helloworld.services.DependencyManager;
-import com.google.inject.Guice;
-import com.google.inject.Injector;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
-import com.example.helloworld.resources.HelloWorldResource;
-import com.example.helloworld.healthchecks.TemplateHealthCheck;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 public class BookStoreApplication extends Application<BookStoreConfiguration> {
     public static void main(String[] args) throws Exception {
+
+        System.out.println("hello world");
+
+        try {
+            EntityManagerFactory emf = Persistence.createEntityManagerFactory("pu");
+            EntityManager em = emf.createEntityManager();
+//
+            Books book1 = em.find(Books.class, "bookId13");
+            System.out.println("foundBook " + book1);
+            // TO set we need to have a transaction
+//            em.getTransaction().begin();
+//            em.persist(new Books("bookId13", "authorId9"));
+//            em.getTransaction().commit();
+
+        } catch (Exception e) {
+            System.out.println("" + e.toString());
+        }
+
+
         new BookStoreApplication().run(args);
     }
 
@@ -38,11 +54,11 @@ public class BookStoreApplication extends Application<BookStoreConfiguration> {
     public void run(BookStoreConfiguration configuration,
                     Environment environment) {
         final HelloWorldResource resource = new HelloWorldResource(
-            configuration.getTemplate(),
-            configuration.getDefaultName()
+                configuration.getTemplate(),
+                configuration.getDefaultName()
         );
         final TemplateHealthCheck healthCheck =
-            new TemplateHealthCheck(configuration.getTemplate());
+                new TemplateHealthCheck(configuration.getTemplate());
         environment.healthChecks().register("template", healthCheck);
         environment.jersey().register(resource);
 
