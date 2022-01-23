@@ -5,18 +5,21 @@ import com.example.helloworld.interfaces.IAuthorInfo;
 import com.example.helloworld.interfaces.IBookInfo;
 import com.example.helloworld.interfaces.IDbService;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Hashtable;
+import java.util.List;
+import java.util.Map;
 
 public class InMemoryDb implements IDbService {
 
-    private static Hashtable<String,IAuthorInfo> authorsInfo = null;
-    private static Hashtable<String,IBookInfo> booksInfo = null;
-    private static Hashtable<String,ArrayList<IBookInfo>> authorToBooksMap = null;
+    private static Hashtable<String, IAuthorInfo> authorsInfo = null;
+    private static Hashtable<String, IBookInfo> booksInfo = null;
+    private static Hashtable<String, ArrayList<IBookInfo>> authorToBooksMap = null;
 
-    public InMemoryDb(){
-        authorsInfo = new Hashtable<String,IAuthorInfo>();
-        booksInfo = new Hashtable<String,IBookInfo>();
-        authorToBooksMap = new Hashtable<String,ArrayList<IBookInfo>>();
+    public InMemoryDb() {
+        authorsInfo = new Hashtable<String, IAuthorInfo>();
+        booksInfo = new Hashtable<String, IBookInfo>();
+        authorToBooksMap = new Hashtable<String, ArrayList<IBookInfo>>();
     }
 
     @Override
@@ -39,7 +42,7 @@ public class InMemoryDb implements IDbService {
 
     @Override
     public List<IBookInfo> getBooksOfAuthor(String authorId) {
-        return authorToBooksMap.getOrDefault(authorId,new ArrayList<IBookInfo>());
+        return authorToBooksMap.getOrDefault(authorId, new ArrayList<IBookInfo>());
     }
 
     @Override
@@ -53,19 +56,19 @@ public class InMemoryDb implements IDbService {
         return books;
     }
 
-    public void printHashTable(Hashtable dict){
+    public void printHashTable(Hashtable dict) {
 
-        dict.forEach((key,value)->{
-            System.out.println("key => "+key);
+        dict.forEach((key, value) -> {
+            System.out.println("key => " + key);
         });
 
     }
 
     @Override
     public boolean addNewBook(IBookInfo book) {
-        System.out.println("book id addNew Book "+book.getId());
-        if(booksInfo.containsKey(book.getId())){
-            System.out.println("Duplicate Book"+book.getId());
+        System.out.println("book id addNew Book " + book.getId());
+        if (booksInfo.containsKey(book.getId())) {
+            System.out.println("Duplicate Book" + book.getId());
             return false;
         }
 
@@ -75,25 +78,25 @@ public class InMemoryDb implements IDbService {
         System.out.println(authorId);
         System.out.println(isAuthorExist);
         // Book must have some author
-        if(!isAuthorExist){
+        if (!isAuthorExist) {
             printHashTable(authorsInfo);
-            System.out.println("Author does not exist so cant add the book with id "+book.getId() );
+            System.out.println("Author does not exist so cant add the book with id " + book.getId());
             return false;
         }
 
-        ArrayList<IBookInfo> existingBook =  authorToBooksMap.getOrDefault(book.getAuthorId(), new ArrayList<IBookInfo>());
+        ArrayList<IBookInfo> existingBook = authorToBooksMap.getOrDefault(book.getAuthorId(), new ArrayList<IBookInfo>());
         existingBook.add(book);
-        authorToBooksMap.put(book.getAuthorId(),existingBook);
-        booksInfo.put(book.getId(),book);
+        authorToBooksMap.put(book.getAuthorId(), existingBook);
+        booksInfo.put(book.getId(), book);
         return true;
     }
 
     @Override
     public boolean addNewAuthor(IAuthorInfo author) {
-        if(authorsInfo.containsKey(author.getId())){
+        if (authorsInfo.containsKey(author.getId())) {
             return false;
         }
-        authorsInfo.put(author.getId(),author);
+        authorsInfo.put(author.getId(), author);
         return true;
     }
 }

@@ -1,10 +1,12 @@
 package com.example.helloworld.entity;
 
+import com.example.helloworld.interfaces.IBookInfo;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
-public class Books {
+public class Books implements IBookInfo {
 
     @Id
     private String id;
@@ -17,7 +19,7 @@ public class Books {
     }
 
     public Books() {
-        
+
     }
 
     public String getId() {
