@@ -7,7 +7,10 @@ public class Author implements IAuthorInfo {
 
     public String id = null;
 
-    public Author(String authorId){
+    public Author() {
+    }
+
+    public Author(String authorId) {
         id = authorId;
     }
 

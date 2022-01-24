@@ -35,7 +35,7 @@ public class MySqlDb implements IDbService {
     public IAuthorInfo getAuthorById(String id) {
         EntityManager em = emf.createEntityManager();
         IAuthorInfo authorInfo = em.find(Author.class, id);
-        System.out.println("Author found :  " + authorInfo);
+        System.out.println("Author found : with id " + id + " is " + authorInfo);
         return authorInfo;
     }
 
