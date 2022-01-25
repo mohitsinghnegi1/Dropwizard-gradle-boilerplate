@@ -35,7 +35,11 @@ public class BookResource {
     public Book addNewBook(@NotNull Book book) {
         System.out.println("Inside add Book");
         System.out.println("bookId : " + book.id);
-        bms.addNewBook(book);
+
+        if (bms.addNewBook(book) == false) {
+            System.out.println(String.format("Book %s not added", book.getId()));
+            return null;
+        }
         return book;
     }
 }

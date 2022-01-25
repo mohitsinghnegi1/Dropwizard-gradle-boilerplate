@@ -4,6 +4,7 @@ import com.example.helloworld.interfaces.IBookInfo;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Books implements IBookInfo {
@@ -11,11 +12,13 @@ public class Books implements IBookInfo {
     @Id
     private String id;
 
-    private String authorId;
+    @ManyToOne
+    private Author author;
 
-    public Books(String id, String authorId) {
+
+    public Books(String id, Author author) {
         this.id = id;
-        this.authorId = authorId;
+        this.author = author;
     }
 
     public Books() {
@@ -31,19 +34,18 @@ public class Books implements IBookInfo {
     }
 
     public String getAuthorId() {
-        return authorId;
+        return author.getId();
     }
 
-    public void setAuthorId(String authorId) {
-        this.authorId = authorId;
+    public Author getAuthor() {
+        return author;
     }
-
 
     @Override
     public String toString() {
         return "Books{" +
                 "id='" + id + '\'' +
-                ", authorId='" + authorId + '\'' +
+                ", authorId='" + author.getId() + '\'' +
                 '}';
     }
 }

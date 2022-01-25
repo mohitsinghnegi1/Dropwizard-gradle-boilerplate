@@ -35,7 +35,10 @@ public class AuthorResource {
     public Author addNewAuthor(@NotNull Author author) {
         System.out.println("Inside add New Author");
         System.out.println("author : " + author.id);
-        ams.addNewAuthor(author);
+        if (ams.addNewAuthor(author) == false) {
+            System.out.println(String.format("Author %s not added", author.getId()));
+            return null;
+        }
         return author;
     }
 

@@ -58,7 +58,7 @@ public class MySqlDb implements IDbService {
     @Override
     public List<IBookInfo> getBooksOfAuthor(String id) {
         EntityManager em = emf.createEntityManager();
-        String query = "SELECT books from " + BOOKS_TABLE + " books WHERE books.authorId = :authId";
+        String query = "SELECT books from " + BOOKS_TABLE + " books WHERE books.author.id = :authId";
         TypedQuery tq = em.createQuery(query, Books.class);
         tq.setParameter("authId", id);
         try {
@@ -104,7 +104,8 @@ public class MySqlDb implements IDbService {
         EntityTransaction et = null;
         try {
             et = em.getTransaction();
-            Books book1 = new Books(book.getId(), book.getAuthorId());
+            Author author = em.getReference(Author.class, book.getAuthorId());
+            Books book1 = new Books(book.getId(), author);
 
             et.begin();
             em.persist(book1);
