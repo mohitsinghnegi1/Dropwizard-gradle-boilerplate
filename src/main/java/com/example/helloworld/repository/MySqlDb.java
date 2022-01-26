@@ -114,7 +114,7 @@ public class MySqlDb implements IDbService {
             em.close();
             return true;
         } catch (Exception e) {
-            if (et == null) {
+            if (et != null && et.isActive()) {
                 et.rollback();
             }
             em.close();
@@ -137,8 +137,9 @@ public class MySqlDb implements IDbService {
             em.close();
             return true;
         } catch (Exception e) {
-            if (et == null) {
+            if (et != null && et.isActive()) {
                 et.rollback();
+
             }
             e.printStackTrace();
             em.close();
