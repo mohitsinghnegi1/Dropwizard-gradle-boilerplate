@@ -11,8 +11,7 @@ import org.junit.Test;
 
 import java.util.List;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class MySqlDbTest {
 
@@ -69,7 +68,7 @@ public class MySqlDbTest {
         if (books.size() > 0) {
             assertTrue(books.get(0) instanceof IBookInfo);
         } else {
-            assertTrue(books.size() == 0);
+            assertEquals(books.size(), 0);
         }
     }
 
