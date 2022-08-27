@@ -26,6 +26,9 @@ public class AuthorResource {
     @GET
     @Timed
     public IAuthorInfo getAuthorById(@QueryParam("authorId") String authorId) {
+
+//            throw new Exception("Invalid author id");
+
         return ams.getAuthorById(authorId);
     }
 

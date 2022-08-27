@@ -5,6 +5,8 @@ import com.example.helloworld.api.Book;
 import com.example.helloworld.interfaces.IBookInfo;
 import com.example.helloworld.services.BookManagementService;
 import com.google.inject.Inject;
+import org.hibernate.criterion.Example;
+import java.util.logging.Logger;
 
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.*;
@@ -16,6 +18,8 @@ import java.util.List;
 public class BookResource {
 
     private final BookManagementService bms;
+    private static final Logger logger = Logger.getLogger("dummyFilter");
+
 
     @Inject
     public BookResource(BookManagementService bms) {
@@ -26,6 +30,8 @@ public class BookResource {
     @GET
     @Timed
     public List<IBookInfo> getAllBooks() {
+        logger.info("Fetching books ....");
+
         return bms.getAllBooks();
     }
 

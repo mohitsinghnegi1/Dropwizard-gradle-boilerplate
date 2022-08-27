@@ -1,9 +1,31 @@
 template: Hello, %s!
 defaultName: Stranger
+logging:
+  appenders:
+    - type: file
+      threshold: INFO
+      logFormat: "%-5p [%d{ISO8601}] [%X{reqId} %X{txnId}] %replace(%c: %m){'\n', '\n '}%replace(%xEx{3}){'\n','\u2028 || '}%nopex%n"
+      currentLogFilename: ./log/app.log
+      archivedLogFilenamePattern: ./log/app-%d-%i.log.gz
+      archivedFileCount: 5
+      maxFileSize: 1000MB
+    - type: console
+      threshold: INFO
+      timeZone: IST
+      logFormat: "%-5p [%d{ISO8601}] [%X{reqId} %X{txnId}] %replace(%c: %m){'\n', '\n '}%replace(%xException{3}){'\n','\u2028 || '}%nopex%n"
+#      logFormat: "%-25p [%d{ISO8601}] [%X{reqId:-reqId} %X{txnId:-txnId}] **** %c ***: message hai ye ->  %m *** Exception hai ye ->%replace(%ex{3}){'[\r\n]+', ' || '} <<<<<< No new exception %nopex &&&&  %n"
+  level: INFO
 server:
+
   applicationConnectors:
     - type: http
       port: 3000
   adminConnectors:
     - type: http
       port: 3001
+  requestLog:
+
+    appenders:
+      - type: console
+        threshold: INFO
+        timeZone: IST

@@ -32,6 +32,10 @@ dependencies {
     testCompile group: 'org.mockito', name: 'mockito-core', version: '3.12.4'
     testCompile 'junit:junit:4.11'
 }
+configurations.all {
+    // Check for updates every build
+    resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+}
 
 
 build.dependsOn shadowJar

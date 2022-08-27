@@ -66,6 +66,7 @@ public class BookStoreApplication extends Application<BookStoreConfiguration> {
 
         environment.jersey().register(bookResource);
         environment.jersey().register(authorResource);
+        environment.jersey().getResourceConfig().register(new LoggingFilter(true));
     }
 
 }
