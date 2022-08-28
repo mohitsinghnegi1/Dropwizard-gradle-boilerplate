@@ -47,6 +47,7 @@ public class BookStoreApplication extends Application<BookStoreConfiguration> {
     public void initialize(Bootstrap<BookStoreConfiguration> bootstrap) {
 
         DependencyManager.init(new Bindings());
+        bootstrap.addBundle(new RequestContextBundle());
     }
 
     @Override
